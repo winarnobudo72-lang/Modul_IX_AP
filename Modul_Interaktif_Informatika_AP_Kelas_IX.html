@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modul Interaktif Informatika IX — Algoritma dan Pemrograman</title>
+<style>
+:root{--navy:#102a43;--blue:#1769aa;--cyan:#dff6ff;--gold:#ffc857;--paper:#f4f8fb;--ink:#203040;--green:#16805d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 "Segoe UI",Arial,sans-serif}
+header{background:linear-gradient(125deg,#102a43,#1769aa 70%,#20a4a8);color:white;padding:30px 18px 26px}
+.hero{max-width:1100px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:.78rem;font-weight:700;color:#ffe39a}
+h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.12;margin:8px 0}header p{max-width:800px;margin:8px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.pill{background:#ffffff20;border:1px solid #ffffff55;border-radius:30px;padding:5px 12px;font-size:.88rem}
+nav{position:sticky;top:0;z-index:5;background:#fff;box-shadow:0 3px 12px #102a4318;display:flex;gap:6px;overflow:auto;padding:9px max(12px,calc((100vw - 1100px)/2))}
+nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-weight:650;padding:8px 12px;border-radius:9px}nav a:hover{background:var(--cyan)}
+main{max-width:1100px;margin:24px auto;padding:0 16px}.section{background:white;border-radius:18px;padding:clamp(18px,3vw,30px);margin:18px 0;box-shadow:0 8px 28px #17324d0d;border:1px solid #e5edf3}
+h2{color:var(--navy);margin:0 0 12px;font-size:1.55rem}h3{color:#1769aa;margin:20px 0 8px}h4{margin:8px 0;color:var(--navy)}.sub{color:#597083;margin-top:-5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{border:1px solid #e1ebf2;border-radius:14px;padding:16px;background:#fbfdff}.card p{margin:6px 0}
+.callout{border-left:5px solid var(--gold);background:#fff8e7;padding:14px 16px;border-radius:8px;margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{border:1px solid #dce6ed;padding:9px;text-align:left;vertical-align:top}th{background:#eaf5fb;color:var(--navy)}
+code,.mono{font-family:Consolas,monospace;background:#eef4f8;border-radius:4px;padding:2px 5px}
+.block-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.block{padding:13px;border-radius:12px;color:#fff;font-weight:700;min-height:95px;box-shadow:inset 0 -4px #0002}.block small{display:block;font-weight:400;margin-top:5px;color:#fff}
+.motion{background:#3977d5}.looks{background:#8a55c7}.events{background:#d6a300;color:#17212b}.control{background:#e58b22}.sensing{background:#229eae}.operators{background:#55a630}.variables{background:#e45c89}.myblocks{background:#9b5b3c}
+.diagram{border:1px solid #dce7ef;background:#f8fcff;padding:18px;border-radius:14px;overflow:auto}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:9px}.node{border:2px solid #1769aa;border-radius:12px;padding:12px 15px;text-align:center;background:white;min-width:130px;font-weight:650}.arrow{font-size:1.5rem;color:#1769aa;font-weight:bold}
+input,select,textarea,button{font:inherit}input,select,textarea{border:1px solid #cbd8e2;border-radius:9px;padding:10px;width:100%;background:white;color:var(--ink)}label{display:block;font-weight:650;margin:10px 0 5px}
+button{border:0;border-radius:10px;padding:10px 15px;background:var(--blue);color:white;font-weight:700;cursor:pointer}button:hover{filter:brightness(.94)}button.secondary{background:#e7f1f8;color:var(--navy)}button.green{background:var(--green)}button.danger{background:#b93838}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:1}
+.lampboard{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.lamp{background:#152433;color:#d9e4ed;border-radius:14px;padding:18px 10px;text-align:center}.bulb{width:58px;height:58px;border-radius:50%;background:#4a5661;margin:0 auto 10px;border:4px solid #293947;box-shadow:inset 0 0 12px #0005}.bulb.on.red{background:#ff3c48;box-shadow:0 0 22px #ff3c48}.bulb.on.yellow{background:#ffd447;box-shadow:0 0 22px #ffd447}.bulb.on.green{background:#39d98a;box-shadow:0 0 22px #39d98a}
+.status{padding:10px;background:#e8f8ef;border-radius:9px;color:#176144;font-weight:650}.question{border:1px solid #e0e9ef;border-radius:12px;padding:16px;margin:12px 0;break-inside:avoid}.question p{font-weight:650;margin:0 0 8px}.option{display:flex;gap:9px;align-items:flex-start;font-weight:400;margin:7px 0}.option input{width:auto;margin-top:6px}.timer{font-size:1.25rem;font-weight:800;color:#b93838}.hide{display:none!important}.small{font-size:.88rem;color:#64788a}.footer{text-align:center;color:#607486;padding:24px}.admin{background:#f4f8fb;border:1px dashed #8aa9bf;padding:16px;border-radius:12px}
+@media(max-width:600px){.lampboard{grid-template-columns:1fr}.row{display:block}.row>*{margin:5px 0}nav{position:static}}
+@media print{body{background:white;font-size:11pt;color:#111}header{background:white!important;color:#111;padding:10px 0;border-bottom:2px solid #123;print-color-adjust:exact}nav,.no-print,button,.admin,.sim-controls{display:none!important}main{max-width:none;margin:0;padding:0}.section{box-shadow:none;border:0;border-radius:0;padding:12px 0;margin:0;break-inside:auto}h2,h3{break-after:avoid;color:#123}.card,.question,.diagram{break-inside:avoid;box-shadow:none}.block{print-color-adjust:exact}.lampboard{grid-template-columns:repeat(3,1fr)}a{color:#111;text-decoration:none}.footer{padding:8px}}
+</style>
+</head>
+<body>
+<header><div class="hero">
+<div class="eyebrow">Modul Ajar Interaktif • Semester Ganjil</div>
+<h1>Algoritma dan Pemrograman</h1>
+<p>Belajar menyusun instruksi, memahami blok pemrograman visual, serta merancang simulasi kendali tiga lampu menggunakan logika program.</p>
+<div class="meta"><span class="pill">SMP Negeri 2 Ngadirejo</span><span class="pill">Informatika • Fase D / Kelas IX</span><span class="pill">Guru: Budi Winarno, S.Kom.</span></div>
+<div class="meta"><span class="pill">Waktu lokal: <strong id="clock">--:--:--</strong></span><span class="pill">Modul digital + siap cetak PDF</span></div>
+</div></header>
+<nav class="no-print"><a href="#identitas">Identitas</a><a href="#cp">CP & ATP</a><a href="#materi">Materi</a><a href="#simulator">Simulator</a><a href="#lkpd">LKPD</a><a href="#asesmen">CBT 30 Soal</a><a href="#admin">Admin</a></nav>
+<main>
+<section class="section" id="identitas"><h2>1. Identitas Modul</h2>
+<div class="grid">
+<div class="card"><h4>Satuan Pendidikan</h4><p>SMP Negeri 2 Ngadirejo</p></div><div class="card"><h4>Mata Pelajaran</h4><p>Informatika</p></div><div class="card"><h4>Fase / Kelas</h4><p>D / IX</p></div><div class="card"><h4>Semester</h4><p>Ganjil</p></div><div class="card"><h4>Elemen</h4><p>Algoritma dan Pemrograman (AP)</p></div><div class="card"><h4>Penyusun / Guru</h4><p>Budi Winarno, S.Kom.</p></div>
+</div>
+<h3>Deskripsi singkat</h3><p>Modul ini membantu peserta didik memahami cara memecahkan masalah melalui urutan langkah yang logis, menerjemahkannya menjadi program visual menggunakan Scratch atau Pictoblox, menguji program, dan memperbaikinya berdasarkan hasil pengujian. Contoh utama berupa simulasi saklar kendali tiga lampu.</p>
+<div class="callout"><b>Pertanyaan pemantik:</b> Bagaimana kita membuat tiga lampu menyala atau mati sesuai tombol yang ditekan, tanpa harus menulis kode teks yang rumit?</div></section>
+<section class="section" id="cp"><h2>2. Capaian Pembelajaran (CP)</h2>
+<p>Rumusan operasional untuk pembelajaran elemen Algoritma dan Pemrograman Fase D: peserta didik mampu memahami dan menerapkan instruksi, variabel, percabangan, perulangan, serta logika sederhana; menyusun algoritma untuk menyelesaikan masalah; membuat dan menguji program visual; serta menjelaskan cara kerja dan memperbaiki kesalahan program.</p>
+<p class="small">Catatan: sesuaikan redaksi CP dengan dokumen kurikulum dan kebijakan sekolah yang sedang digunakan.</p>
+<h3>Alur Tujuan Pembelajaran (ATP)</h3><table><thead><tr><th>Pertemuan</th><th>Tujuan pembelajaran</th><th>Bukti belajar</th></tr></thead><tbody>
+<tr><td>1</td><td>Menjelaskan algoritma, program, urutan instruksi, dan contoh penerapannya.</td><td>Menulis algoritma sederhana dalam bahasa sehari-hari atau pseudocode.</td></tr>
+<tr><td>2</td><td>Mengidentifikasi kelompok blok Scratch/Pictoblox serta fungsi tiap kelompok.</td><td>Mengelompokkan blok berdasarkan fungsi dan memprediksi hasilnya.</td></tr>
+<tr><td>3</td><td>Menggunakan event, control, operator, dan variable untuk membuat program interaktif.</td><td>Proyek kecil berbasis tombol atau pesan.</td></tr>
+<tr><td>4</td><td>Merancang, menjalankan, menguji, dan memperbaiki simulasi kendali tiga lampu.</td><td>Program berfungsi, hasil uji, dan refleksi LKPD.</td></tr>
+</tbody></table>
+<h3>Kriteria keberhasilan</h3><ul><li>Dapat menjelaskan alur program dengan runtut.</li><li>Dapat memilih blok yang sesuai dengan kebutuhan.</li><li>Dapat menguji program dengan beberapa skenario dan menemukan kesalahan sederhana.</li><li>Dapat menjelaskan hubungan input, proses, dan output.</li></ul></section>
+<section class="section" id="materi"><h2>3. Materi: Scratch dan Pictoblox</h2>
+<h3>A. Apa itu pemrograman visual?</h3><p>Pemrograman visual menyusun instruksi menggunakan blok yang saling terhubung. Bentuk blok membantu pemula mengenali struktur program tanpa harus menghafal banyak sintaks. <b>Scratch</b> sering digunakan untuk membuat animasi, cerita, dan permainan; <b>Pictoblox</b> memiliki pendekatan blok yang serupa dan dapat mendukung proyek AI, perangkat keras, serta IoT sesuai ekstensi/perangkat yang digunakan.</p>
+<div class="diagram"><div class="flow"><div class="node">Input<br><small>tombol ditekan</small></div><div class="arrow">→</div><div class="node">Proses<br><small>aturan / logika</small></div><div class="arrow">→</div><div class="node">Output<br><small>lampu berubah</small></div></div><p class="small" style="text-align:center;margin-bottom:0">Diagram konsep dasar program interaktif</p></div>
+<h3>B. Bagian utama antarmuka</h3><div class="grid">
+<div class="card"><h4>Palet blok</h4><p>Kumpulan instruksi yang dikelompokkan menurut fungsi.</p></div><div class="card"><h4>Area kode / skrip</h4><p>Tempat menyusun blok menjadi urutan instruksi.</p></div><div class="card"><h4>Panggung / Stage</h4><p>Area untuk melihat hasil animasi atau simulasi.</p></div><div class="card"><h4>Sprite / objek</h4><p>Karakter atau objek yang menjalankan skrip.</p></div><div class="card"><h4>Tab kostum & suara</h4><p>Mengatur tampilan dan audio objek.</p></div><div class="card"><h4>Tombol mulai / berhenti</h4><p>Menjalankan atau menghentikan proyek.</p></div></div>
+<h3>C. Kelompok blok dan fungsi</h3><div class="block-grid">
+<div class="block motion">MOTION / GERAK<small>Memindahkan objek, mengubah posisi x-y, mengatur arah, meluncur.</small></div>
+<div class="block looks">LOOKS / TAMPILAN<small>Mengubah kostum, ukuran, efek, menampilkan atau menyembunyikan objek.</small></div>
+<div class="block events">EVENTS / KEJADIAN<small>Memulai skrip saat bendera hijau diklik, tombol ditekan, atau pesan diterima.</small></div>
+<div class="block control">CONTROL / KONTROL<small>Menunggu, mengulang (repeat/forever), serta membuat percabangan if atau if-else.</small></div>
+<div class="block sensing">SENSING / SENSOR<small>Mendeteksi tombol, sentuhan, jarak, atau kondisi masukan lain yang tersedia.</small></div>
+<div class="block operators">OPERATORS / OPERATOR<small>Operasi matematika, perbandingan, serta logika AND, OR, NOT.</small></div>
+<div class="block variables">VARIABLES / VARIABEL<small>Menyimpan nilai, misalnya statusLampu = 1 (menyala) atau 0 (mati).</small></div>
+<div class="block myblocks">MY BLOCKS / BLOK BUATAN<small>Membuat prosedur sendiri agar skrip lebih rapi dan dapat digunakan kembali.</small></div>
+</div>
+<h3>D. Contoh blok yang sering digunakan</h3><table><thead><tr><th>Blok / konsep</th><th>Fungsi</th><th>Contoh pemakaian</th></tr></thead><tbody>
+<tr><td><code>when green flag clicked</code></td><td>Memulai skrip ketika bendera hijau diklik.</td><td>Inisialisasi status awal.</td></tr>
+<tr><td><code>when [space] key pressed</code></td><td>Menjalankan skrip ketika tombol tertentu ditekan.</td><td>Tombol spasi mengubah lampu.</td></tr>
+<tr><td><code>wait (1) seconds</code></td><td>Menunda jalannya instruksi selama waktu tertentu.</td><td>Memberi jeda antar keadaan lampu.</td></tr>
+<tr><td><code>repeat (10)</code> / <code>forever</code></td><td>Mengulang instruksi beberapa kali atau terus-menerus.</td><td>Menjalankan pola lampu berulang.</td></tr>
+<tr><td><code>if &lt;condition&gt; then</code></td><td>Menjalankan perintah jika kondisi benar.</td><td>Jika tombol ditekan, ubah status lampu.</td></tr>
+<tr><td><code>set [variabel] to (nilai)</code></td><td>Menyimpan nilai ke variabel.</td><td>Mencatat lampu mana yang aktif.</td></tr>
+<tr><td><code>broadcast [pesan]</code></td><td>Mengirim pesan agar skrip lain bereaksi.</td><td>Mengirim pesan “LampuMerah”.</td></tr>
+</tbody></table>
+<h3>E. Algoritma dan pseudocode</h3><div class="diagram"><pre class="mono" style="white-space:pre-wrap">MULAI
+atur semua lampu = MATI
+selama program berjalan:
+  jika tombol 1 dipilih, ubah status Lampu 1
+  jika tombol 2 dipilih, ubah status Lampu 2
+  jika tombol 3 dipilih, ubah status Lampu 3
+SELESAI saat pengguna menekan tombol berhenti</pre></div>
+<p>Algoritma di atas menggunakan kejadian (event) dan percabangan. Dalam proyek sebenarnya, setiap tombol dapat mengubah satu variabel status, lalu tampilan lampu diperbarui sesuai nilai variabel tersebut.</p>
+<h3>F. Scratch dan Pictoblox: persamaan dan perbedaan</h3><table><thead><tr><th>Aspek</th><th>Scratch</th><th>Pictoblox</th></tr></thead><tbody><tr><td>Dasar</td><td>Blok visual untuk animasi, cerita, dan game.</td><td>Blok visual dengan alur mirip Scratch.</td></tr><tr><td>Penggunaan</td><td>Sprite, panggung, event, kontrol, variabel.</td><td>Blok visual, serta fitur tambahan melalui ekstensi yang didukung.</td></tr><tr><td>Perangkat keras / AI</td><td>Memerlukan ekstensi atau integrasi tertentu.</td><td>Dapat mendukung sejumlah perangkat dan fitur AI sesuai versi, ekstensi, dan perangkat.</td></tr><tr><td>Prinsip pemrograman</td><td colspan="2">Keduanya menggunakan urutan, event, percabangan, perulangan, operator, dan variabel.</td></tr></tbody></table>
+<div class="callout"><b>Ingat:</b> susunan blok harus logis. Periksa event pemicu, kondisi, nilai variabel, dan urutan instruksi jika hasil program tidak sesuai harapan.</div>
+</section>
+<section class="section" id="simulator"><h2>4. Contoh Program: Simulator Saklar Kendali 3 Lampu</h2><p>Simulator ini mencontohkan logika kendali tiga lampu secara virtual. Klik saklar untuk mengubah status setiap lampu. Ini adalah simulasi pada halaman web, bukan kendali perangkat listrik fisik.</p>
+<div class="lampboard">
+<div class="lamp"><div id="bulb1" class="bulb red"></div><b>LAMPU 1</b><p id="state1">MATI</p><button class="sim-controls" onclick="toggleLamp(1)">Saklar 1</button></div>
+<div class="lamp"><div id="bulb2" class="bulb yellow"></div><b>LAMPU 2</b><p id="state2">MATI</p><button class="sim-controls" onclick="toggleLamp(2)">Saklar 2</button></div>
+<div class="lamp"><div id="bulb3" class="bulb green"></div><b>LAMPU 3</b><p id="state3">MATI</p><button class="sim-controls" onclick="toggleLamp(3)">Saklar 3</button></div>
+</div>
+<div class="row sim-controls"><button onclick="allLamps(true)">Nyalakan semua</button><button class="secondary" onclick="allLamps(false)">Matikan semua</button><button class="secondary" onclick="resetLamps()">Reset</button></div><p class="status" id="simStatus" aria-live="polite">Semua lampu mati. Pilih saklar untuk memulai.</p>
+<h3>Diagram alir program</h3><div class="diagram"><div class="flow"><div class="node">Mulai</div><div class="arrow">→</div><div class="node">Pilih saklar 1 / 2 / 3</div><div class="arrow">→</div><div class="node">Balik status lampu terpilih</div><div class="arrow">→</div><div class="node">Perbarui tampilan</div><div class="arrow">↻</div></div></div>
+<h3>Rancangan blok Scratch/Pictoblox</h3><div class="diagram"><pre class="mono" style="white-space:pre-wrap">ketika bendera hijau diklik
+  atur [lampu1] ke 0
+  atur [lampu2] ke 0
+  atur [lampu3] ke 0
+
+ketika tombol [1] ditekan
+  jika <(lampu1) = 0> maka
+    atur [lampu1] ke 1
+    ubah kostum/tampilan Lampu1 menjadi MENYALA
+  jika tidak
+    atur [lampu1] ke 0
+    ubah kostum/tampilan Lampu1 menjadi MATI
+
+Ulangi pola yang sama untuk tombol [2] dan [3].</pre></div>
+<p class="small">Di Scratch, buat objek lampu dengan dua kostum (menyala/mati), atau gunakan variabel dan blok Looks. Di Pictoblox, sesuaikan nama blok dengan versi aplikasi. Jika menggunakan LED fisik, rangkaian wajib dirancang dengan guru dan komponen pembatas arus yang sesuai.</p></section>
+<section class="section" id="lkpd"><h2>5. LKPD — Lembar Kerja Peserta Didik</h2><p class="sub">Isi identitas, lakukan pengamatan simulator, lalu tulis jawaban dengan bahasa sendiri.</p>
+<div class="grid"><div><label for="studentName">Nama siswa</label><input id="studentName" placeholder="Masukkan nama lengkap"></div><div><label for="studentClass">Kelas</label><select id="studentClass"><option value="">Pilih kelas</option><option>IXA</option><option>IXB</option><option>IXC</option><option>IXD</option><option>IXE</option><option>IXF</option><option>IXG</option></select></div></div>
+<label for="lkpd1">1. Jelaskan perbedaan algoritma dan program.</label><textarea id="lkpd1" rows="3" placeholder="Tuliskan jawaban..."></textarea>
+<label for="lkpd2">2. Blok apa yang digunakan untuk memulai skrip saat bendera hijau diklik? Jelaskan fungsinya.</label><textarea id="lkpd2" rows="3"></textarea>
+<label for="lkpd3">3. Buat urutan algoritma untuk menyalakan Lampu 2 lalu mematikannya kembali.</label><textarea id="lkpd3" rows="3"></textarea>
+<label for="lkpd4">4. Catat hasil uji: saklar mana yang ditekan dan lampu mana yang berubah?</label><textarea id="lkpd4" rows="3"></textarea>
+<label for="lkpd5">5. Sebutkan satu kemungkinan kesalahan program dan cara memperbaikinya.</label><textarea id="lkpd5" rows="3"></textarea>
+<div class="row no-print"><button onclick="saveLKPD()">Simpan jawaban di perangkat ini</button><button class="secondary" onclick="downloadLKPD()">Unduh LKPD (.txt)</button><button class="secondary" onclick="window.print()">Cetak / Simpan PDF</button></div><p id="lkpdMsg" class="small" aria-live="polite">Penyimpanan LKPD hanya pada browser/perangkat ini. Untuk mengumpulkan ke guru, unduh berkas lalu kirim melalui kanal kelas.</p>
+</section>
+<section class="section" id="asesmen"><h2>6. Asesmen CBT — 30 Pilihan Ganda</h2><p>Soal dan urutan pilihan diacak ketika asesmen dimulai. Waktu pengerjaan 60 menit. Pastikan identitas terisi sebelum memulai. Nilai dihitung otomatis setelah jawaban dikirim atau waktu habis.</p>
+<div class="grid"><div><label for="cbtName">Nama siswa</label><input id="cbtName" placeholder="Nama lengkap"></div><div><label for="cbtClass">Kelas</label><select id="cbtClass"><option value="">Pilih kelas</option><option>IXA</option><option>IXB</option><option>IXC</option><option>IXD</option><option>IXE</option><option>IXF</option><option>IXG</option></select></div></div>
+<div class="row" style="margin:15px 0"><button id="startBtn" onclick="startQuiz()">Mulai asesmen</button><span class="timer" id="timer">60:00</span><span id="quizStatus" class="small">Belum dimulai</span></div>
+<div id="quizArea"></div><div class="no-print"><button id="submitBtn" class="green hide" onclick="submitQuiz(false)">Kirim jawaban dan hitung nilai</button></div><div id="result" class="callout hide" aria-live="polite"></div>
+</section>
+<section class="section" id="admin"><h2>7. Panel Admin / Guru</h2><p>Panel ini menyimpan hasil asesmen di browser yang sama. Untuk mencegah akses tidak sengaja, masukkan kata sandi lokal. <b>Catatan:</b> ini bukan sistem login aman untuk publik; data tidak terkirim ke server dan tidak otomatis tersinkron antarperangkat.</p>
+<div class="admin no-print"><label for="adminPass">Kata sandi admin lokal</label><div class="row"><input id="adminPass" type="password" placeholder="Kata sandi awal: guru123"><button onclick="unlockAdmin()">Buka panel</button></div><div id="adminPanel" class="hide"><h3>Hasil asesmen tersimpan di browser ini</h3><p id="resultCount">Belum ada hasil.</p><div class="row"><button class="green" onclick="downloadResults()">Unduh hasil (CSV)</button><button class="secondary" onclick="window.print()">Cetak / Simpan modul PDF</button><button class="danger" onclick="clearResults()">Hapus seluruh hasil lokal</button></div><div style="overflow:auto"><table id="resultsTable"><thead><tr><th>Nama</th><th>Kelas</th><th>Nilai</th><th>Benar</th><th>Waktu</th></tr></thead><tbody></tbody></table></div></div></div>
+<p class="small">Untuk membuat PDF: tekan tombol “Cetak / Simpan PDF”, lalu pilih “Save as PDF / Simpan sebagai PDF” pada dialog cetak browser. Tampilan akan otomatis disederhanakan untuk cetak.</p>
+</section>
+<section class="section"><h2>8. Refleksi dan Tindak Lanjut</h2><ul><li>Konsep apa yang paling mudah kamu pahami?</li><li>Bagian mana yang masih membingungkan: event, variabel, percabangan, atau perulangan?</li><li>Bagaimana kamu menguji agar setiap saklar hanya mengubah lampu yang benar?</li></ul><p><b>Tindak lanjut:</b> kembangkan simulasi dengan tombol “semua lampu”, indikator status, atau pola lampu otomatis menggunakan blok <code>wait</code> dan <code>forever</code>.</p></section>
+</main><div class="footer">Modul Interaktif Informatika • SMP Negeri 2 Ngadirejo • Budi Winarno, S.Kom.</div>
+<script>
+const $=id=>document.getElementById(id);
+function updateClock(){const d=new Date();$('clock').textContent=d.toLocaleTimeString('id-ID',{hour12:false})+' • '+d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});}
+updateClock();setInterval(updateClock,1000);
+const lamps=[false,false,false], colors=['red','yellow','green'];
+function renderLamps(){lamps.forEach((on,i)=>{$('bulb'+(i+1)).className='bulb '+colors[i]+(on?' on':'');$('state'+(i+1)).textContent=on?'MENYALA':'MATI';});let active=lamps.map((v,i)=>v?'Lampu '+(i+1):null).filter(Boolean);$('simStatus').textContent=active.length?'Menyala: '+active.join(', ')+'.':'Semua lampu mati.';}
+function toggleLamp(n){lamps[n-1]=!lamps[n-1];renderLamps()}function allLamps(v){for(let i=0;i<3;i++)lamps[i]=v;renderLamps()}function resetLamps(){allLamps(false)}
+function saveLKPD(){const data={nama:$('studentName').value,kelas:$('studentClass').value,answers:[1,2,3,4,5].map(i=>$('lkpd'+i).value),savedAt:new Date().toLocaleString('id-ID')};if(!data.nama||!data.kelas){$('lkpdMsg').textContent='Isi nama dan kelas terlebih dahulu.';return}try{localStorage.setItem('lkpd_ap_'+data.nama+'_'+data.kelas,JSON.stringify(data));$('lkpdMsg').textContent='LKPD tersimpan pada browser ini. Unduh berkas sebagai cadangan.'}catch(e){$('lkpdMsg').textContent='Browser tidak mengizinkan penyimpanan lokal. Gunakan Unduh LKPD.'}}
+function downloadText(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function downloadLKPD(){const d=['LKPD INFORMATIKA — ALGORITMA DAN PEMROGRAMAN','Nama: '+$('studentName').value,'Kelas: '+$('studentClass').value,'Tanggal: '+new Date().toLocaleString('id-ID'),''];[1,2,3,4,5].forEach(i=>d.push(i+'. '+$('lkpd'+i).previousElementSibling.textContent,'Jawaban: '+$('lkpd'+i).value,''));downloadText('LKPD_AP_'+(($('studentName').value||'siswa').replace(/[^a-z0-9]/gi,'_'))+'.txt',d.join('\n'))}
+const bank=[
+['Apa yang dimaksud algoritma?',['Urutan langkah logis untuk menyelesaikan masalah','Bahasa khusus untuk menggambar','Perangkat keras komputer','Hasil akhir tanpa proses'],0],
+['Program komputer adalah...',['Kumpulan gambar pada layar','Instruksi yang dijalankan komputer','Kabel penghubung perangkat','Nama lain untuk monitor'],1],
+['Blok Scratch yang memulai skrip saat bendera hijau diklik termasuk kelompok...',['Motion','Looks','Events','Operators'],2],
+['Fungsi blok “wait 1 seconds” adalah...',['Menghapus program','Menunda instruksi selama satu detik','Menggandakan sprite','Mengubah nilai variabel'],1],
+['Blok “repeat (10)” digunakan untuk...',['Mengulang instruksi 10 kali','Menghentikan komputer','Menyimpan gambar','Membuat suara selalu'],0],
+['Struktur if-then digunakan untuk...',['Mengatur ukuran layar','Menjalankan perintah jika kondisi benar','Membuat variabel otomatis selalu nol','Mengganti nama proyek'],1],
+['Variabel berguna untuk...',['Menyimpan nilai atau status','Menghubungkan monitor ke listrik','Menghapus semua blok','Mengganti perangkat keras'],0],
+['Operator AND menghasilkan benar jika...',['Semua kondisi yang diuji benar','Salah satu kondisi salah','Tidak ada kondisi','Program berhenti'],0],
+['Pada simulator tiga lampu, input dapat berupa...',['Saklar/tombol yang dipilih','Warna latar halaman saja','Ukuran font','Nama file'],0],
+['Output dari simulator lampu adalah...',['Perubahan status/tampilan lampu','Nama siswa','Daftar pustaka','Kata sandi admin'],0],
+['Apa fungsi blok forever?',['Mengulang instruksi terus-menerus','Mengulang tepat dua kali','Mengubah sprite menjadi variabel','Mencetak dokumen'],0],
+['Kelompok blok Motion terutama mengatur...',['Gerak dan posisi objek','Kondisi jaringan internet','Data nilai siswa','Suara mikrofon'],0],
+['Kelompok Looks terutama mengatur...',['Tampilan objek','Urutan alfabet','Koneksi listrik','Nama pengguna'],0],
+['Broadcast pada Scratch digunakan untuk...',['Mengirim pesan pemicu ke skrip lain','Mematikan layar','Menyimpan PDF otomatis','Menghapus sprite'],0],
+['Pseudocode adalah...',['Penulisan langkah algoritma dengan bahasa sederhana terstruktur','Bahasa mesin biner saja','Gambar dekorasi','Jenis kabel'],0],
+['Jika lampu1 bernilai 0 berarti menurut rancangan contoh...',['Lampu mati','Lampu rusak pasti','Lampu menyala terang','Program selesai'],0],
+['Mengapa program perlu diuji?',['Untuk memeriksa apakah hasil sesuai tujuan','Agar kode menjadi lebih panjang','Supaya tidak perlu algoritma','Agar monitor berubah ukuran'],0],
+['Kesalahan pada program sering disebut...',['Bug','Pixel','Folder','Browser'],0],
+['Perbaikan dan pencarian kesalahan program disebut...',['Debugging','Downloading','Browsing','Formatting'],0],
+['Pernyataan input-proses-output yang benar adalah...',['Tombol ditekan → program memproses → lampu berubah','Lampu berubah → tombol ditekan → program hilang','Proses → output → input selalu','Output tidak memerlukan proses'],0],
+['Blok Sensing dapat digunakan untuk...',['Mendeteksi masukan atau kondisi tertentu','Mewarnai semua kabel nyata','Mengganti CPU','Mencetak halaman'],0],
+['Pictoblox dan Scratch sama-sama menggunakan...',['Pemrograman berbasis blok visual','Hanya kode mesin','Hanya perintah suara','Hanya tabel angka'],0],
+['Salah satu kegunaan Pictoblox adalah...',['Membuat proyek blok dan fitur tambahan sesuai ekstensi','Menggantikan seluruh komponen komputer','Memperbaiki kabel otomatis','Mencetak tanpa perangkat'],0],
+['Agar hanya lampu 2 yang berubah, program sebaiknya...',['Memperbarui status lampu 2 saja saat saklar 2 dipilih','Mengubah semua variabel setiap saat','Menghapus semua event','Menjalankan skrip tanpa kondisi'],0],
+['Jika sebuah skrip tidak berjalan saat tombol ditekan, hal pertama yang perlu diperiksa...',['Event pemicu dan tombol yang dipilih','Warna meja','Resolusi printer','Nama folder unduhan saja'],0],
+['Simbol panah pada diagram alir umumnya menunjukkan...',['Arah urutan proses','Warna hasil','Jumlah siswa','Nama perangkat'],0],
+['Perulangan cocok digunakan ketika...',['Langkah yang sama perlu dilakukan berulang','Setiap instruksi hanya boleh sekali','Tidak ada instruksi','Program tidak memiliki tujuan'],0],
+['Jika kondisi if bernilai salah dan tidak ada else, maka...',['Isi if dilewati','Komputer pasti mati','Semua lampu pasti menyala','Variabel selalu bertambah'],0],
+['Mengapa variabel status lampu berguna?',['Program dapat menyimpan dan memeriksa keadaan lampu','Membuat lampu fisik tanpa rangkaian','Mengganti monitor','Menghapus kebutuhan pengujian'],0],
+['Sikap terbaik saat hasil program berbeda dari dugaan adalah...',['Periksa langkah, kondisi, dan uji satu per satu','Langsung menghapus semua proyek','Mengabaikan hasil','Mengganti komputer tanpa pemeriksaan'],0]
+];
+let activeQuestions=[],quizStarted=false,quizDone=false,remaining=3600,tick=null;
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(){if(quizStarted&&!quizDone)return;if(!$('cbtName').value.trim()||!$('cbtClass').value){alert('Isi nama dan pilih kelas terlebih dahulu.');return}quizStarted=true;quizDone=false;remaining=3600;activeQuestions=shuffle(bank.map((q,i)=>({q,i,opts:shuffle(q[1].map((t,j)=>({t,j})))})));$('result').classList.add('hide');$('quizArea').innerHTML='';activeQuestions.forEach((item,n)=>{const div=document.createElement('div');div.className='question';div.innerHTML='<p>'+ (n+1)+'. '+item.q[0]+'</p>'+item.opts.map((o,k)=>'<label class="option"><input type="radio" name="q'+n+'" value="'+o.j+'"> <span>'+String.fromCharCode(65+k)+'. '+escapeHtml(o.t)+'</span></label>').join('');$('quizArea').appendChild(div)});$('submitBtn').classList.remove('hide');$('startBtn').disabled=true;$('quizStatus').textContent='Sedang dikerjakan';updateTimer();tick=setInterval(()=>{remaining--;updateTimer();if(remaining<=0)submitQuiz(true)},1000)}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function updateTimer(){const m=Math.floor(remaining/60),s=remaining%60;$('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function submitQuiz(auto){if(!quizStarted||quizDone)return;if(!auto&&!confirm('Kirim jawaban sekarang?'))return;quizDone=true;clearInterval(tick);let correct=0,answered=0;activeQuestions.forEach((item,n)=>{const selected=document.querySelector('input[name="q'+n+'"]:checked');if(selected){answered++;if(Number(selected.value)===item.q[2])correct++}});const score=Math.round(correct/activeQuestions.length*100);const record={nama:$('cbtName').value.trim(),kelas:$('cbtClass').value,nilai:score,benar:correct,terjawab:answered,waktu:new Date().toLocaleString('id-ID'),durasi:3600-remaining};let records=[];try{records=JSON.parse(localStorage.getItem('cbt_ap_results')||'[]')}catch(e){}records.push(record);try{localStorage.setItem('cbt_ap_results',JSON.stringify(records))}catch(e){}$('result').classList.remove('hide');$('result').innerHTML='<h3>Hasil Asesmen</h3><p><b>Nama:</b> '+escapeHtml(record.nama)+' | <b>Kelas:</b> '+record.kelas+'</p><p><b>Nilai:</b> '+score+' / 100 &nbsp; • &nbsp; <b>Jawaban benar:</b> '+correct+' dari 30 &nbsp; • &nbsp; <b>Terjawab:</b> '+answered+'</p><p>'+ (auto?'Waktu habis; jawaban yang sudah dipilih telah dinilai.':'Jawaban berhasil dinilai.')+'</p><p class="small">Hasil disimpan secara lokal pada browser ini. Hubungi guru/admin untuk mengirimkan hasil jika diperlukan.</p>';document.querySelectorAll('#quizArea input').forEach(el=>el.disabled=true);$('submitBtn').classList.add('hide');$('startBtn').disabled=false;$('quizStatus').textContent='Selesai';refreshResults()}
+function unlockAdmin(){if($('adminPass').value==='guru123'){$('adminPanel').classList.remove('hide');refreshResults()}else alert('Kata sandi tidak sesuai.')}
+function getResults(){try{return JSON.parse(localStorage.getItem('cbt_ap_results')||'[]')}catch(e){return []}}
+function refreshResults(){const rows=getResults();$('resultCount').textContent=rows.length+' hasil tersimpan pada browser ini.';const tbody=$('resultsTable').querySelector('tbody');tbody.innerHTML='';rows.forEach(r=>{const tr=document.createElement('tr');[r.nama,r.kelas,r.nilai,r.benar,r.waktu].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tbody.appendChild(tr)})}
+function downloadResults(){const rows=getResults();if(!rows.length){alert('Belum ada hasil untuk diunduh.');return}const cols=['nama','kelas','nilai','benar','terjawab','waktu','durasi'];const csv=[cols.join(','),...rows.map(r=>cols.map(k=>'"'+String(r[k]??'').replace(/"/g,'""')+'"').join(','))].join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download='hasil_asesmen_informatika.csv';a.click();URL.revokeObjectURL(a.href)}
+function clearResults(){if(confirm('Hapus semua hasil asesmen lokal pada browser ini?')){localStorage.removeItem('cbt_ap_results');refreshResults()}}
+</script>
+</body></html>
